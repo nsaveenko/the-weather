@@ -4,6 +4,7 @@ const temp = document.querySelector(".temp");
 const description = document.querySelector(".weather-descripton")
 const humidity = document.querySelector(".humidity-value");
 const pressure = document.querySelector(".pressure-value");
+const weatherIconSrc = document.querySelector(".icon").src;
 
 const weatherApiConfig = {
     apiKey: "c0fec93c79e38fa329d29aa7ddf6849a",
@@ -22,12 +23,15 @@ const weatherApiConfig = {
             pressure: data.main.pressure
         }
 
+        const {icon} = data.weather[0];
+
         cityTitle.innerHTML = currentWeather.cityName;
         windSpeed.innerHTML = currentWeather.windSpeed + " km/h";
         temp.innerHTML = currentWeather.temp + "°";
         description.innerHTML = currentWeather.description;
         humidity.innerHTML = currentWeather.humidity + " %";
-        pressure.innerHTML = currentWeather.pressure + " mb"
+        pressure.innerHTML = currentWeather.pressure + " mb"; 
+        document.querySelector(".icon").src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
     }
 }
 
