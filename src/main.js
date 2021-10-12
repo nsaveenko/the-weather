@@ -5,8 +5,10 @@ const description = document.querySelector(".weather-descripton")
 const humidity = document.querySelector(".humidity-value");
 const pressure = document.querySelector(".pressure-value");
 const weatherIconSrc = document.querySelector(".icon").src;
+const searchButton = document.querySelector(".search-button");
+const searchBar = document.querySelector(".search-bar");
 
-const weatherApiConfig = {
+const weather = {
     apiKey: "c0fec93c79e38fa329d29aa7ddf6849a",
     fetchWeather: function(city = "Minsk") {
         fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + this.apiKey)
@@ -32,7 +34,21 @@ const weatherApiConfig = {
         humidity.innerHTML = currentWeather.humidity + " %";
         pressure.innerHTML = currentWeather.pressure + " mb"; 
         document.querySelector(".icon").src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+    },
+    search: function () {
+        this.fetchWeather(searchBar.value)
+        searchBar.value = "";
     }
 }
 
-weatherApiConfig.fetchWeather()
+weather.fetchWeather();
+
+searchButton.addEventListener("click", function () {
+    weather.search();
+})
+
+searchBar.addEventListener("keyup", function(event) {
+    if (event.key == "Enter") {
+        weather.search();
+    }
+})
