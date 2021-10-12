@@ -18,7 +18,11 @@ button, input {
     display: flex;
     margin: 0 auto;
     width: 100%;
-    max-width: 1600px;
+    max-width: 1200px;
+}
+
+i {
+    color: #5e7ca8;
 }
 
 .search {
@@ -47,9 +51,9 @@ button, input {
 }
 
 .weather {
-    padding-top: 100px;
+    padding-top: 50px;
     color: #fff;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .weather-descripton {
