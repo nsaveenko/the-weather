@@ -72,7 +72,7 @@ i {
 
 .card {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
     align-items: center;
 }
@@ -118,6 +118,19 @@ span {
 .temp {
     font-size: 130px;
     font-weight: 100;
+}
+
+.sun-state {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.sun-state-illustration {
+    width: 413px;
+    height: 1px;
+    background: linear-gradient(0.25deg, #ff659f, #ffe5ac);
 }
 
 .sun-state h2 {
@@ -191,7 +204,7 @@ span {
 .daily-forecast-card {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding-bottom: 20px;
 }
 
@@ -202,4 +215,9 @@ span {
 .min-temp {
     margin-left: 30px;
     color: #37576f;
+}
+
+.daily-forecast-cards-week {
+    width: 100%;
+    max-width: 150px;
 }

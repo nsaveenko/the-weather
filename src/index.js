@@ -9,6 +9,8 @@ const searchBar = document.querySelector(".search-bar");
 const sunrise = document.querySelector(".sunrise-time-value");
 const sunset = document.querySelector(".sunset-time-value");
 const main = document.querySelector("main");
+const dailyCardsList = document.querySelector('.daily-forecast-cards');
+const hourlyCardsList = document.querySelector('.hourly-forecast-cards');
 const currentDate = new Date();
 const currentTime = currentDate.getHours();
 
@@ -17,7 +19,8 @@ const weather = {
     fetchWeather: function(city = "Minsk", daysCount = 3) {
         fetch("https://api.weatherapi.com/v1/forecast.json?key=" + this.apiKey + "&q=" + city + "&days=" + daysCount + "&aqi=no&alerts=no")
             .then(response => response.json())
-            .then(data => this.displayWeather(data));
+            .then(data => this.displayWeather(data))
+            .catch(error => alert("Something went wrong :("));
     },
     displayWeather: function(data) {
         const currentWeather = {
@@ -62,18 +65,29 @@ const weather = {
 
 weather.fetchWeather();
 
+function convertTime(timeValue) {
+    return timeValue.substring(11, 16);
+}
+
+function convertToWeekDay(incorrectDate) {
+    let date = new Date(incorrectDate);
+    let options = { weekday: 'long' };
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+}
+
 searchButton.addEventListener("click", function () {
+    updateCity();
     weather.search();
 })
 
 searchBar.addEventListener("keyup", function(event) {
     if (event.key == "Enter") {
+        updateCity();
         weather.search();
     }
 })
 
 function createHourlyForecastCardsForToday(data) {
-    const cardsList = document.querySelector('.hourly-forecast-cards');
     const card = document.createElement("div");
     const timeTitle = document.createElement("h4");
     const iconCard = document.createElement("img");
@@ -84,7 +98,7 @@ function createHourlyForecastCardsForToday(data) {
     timeTitle.className = "hourly-forecast-cards-time";
     tempTitle.className = "hourly-forecast-cards-temp";
 
-    cardsList.appendChild(card);
+    hourlyCardsList.appendChild(card);
     card.appendChild(timeTitle);
     card.appendChild(iconCard);
     card.appendChild(tempTitle);
@@ -94,12 +108,7 @@ function createHourlyForecastCardsForToday(data) {
     tempTitle.innerHTML = Math.round(data.temp_c) + "°";
 }
 
-function convertTime(timeValue) {
-    return timeValue.substring(11, 16);
-}
-
 function createDailyForecastCards(data) {
-    const cardsList = document.querySelector('.daily-forecast-cards');
     const card = document.createElement("div");
     const dayOfWeek = document.createElement("p");
     const iconCard = document.createElement("img");
@@ -108,21 +117,26 @@ function createDailyForecastCards(data) {
     const minTempTitle = document.createElement("p");
 
     card.className = "daily-forecast-card";
-    dayOfWeek.className = "daily-forecast-cards-time";
+    dayOfWeek.className = "daily-forecast-cards-week";
     iconCard.className = "daily-forecast-cards-icon";
     tempContainer.className = "temp-container";
     maxTempTitle.className = "max-temp";
     minTempTitle.className = "min-temp";
 
-    cardsList.appendChild(card);
+    dailyCardsList.appendChild(card);
     card.appendChild(dayOfWeek);
     card.appendChild(iconCard);
     card.appendChild(tempContainer);
     tempContainer.appendChild(maxTempTitle);
     tempContainer.appendChild(minTempTitle);
 
-    dayOfWeek.innerHTML = data.date;
+    dayOfWeek.innerHTML = convertToWeekDay(data.date);
     iconCard.src = data.day.condition.icon;
     maxTempTitle.innerHTML = Math.round(data.day.maxtemp_c) + "°";
     minTempTitle.innerHTML = Math.round(data.day.mintemp_c) + "°";
+}
+
+function updateCity() {
+    dailyCardsList.innerHTML = "";
+    hourlyCardsList.innerHTML = "";
 }
