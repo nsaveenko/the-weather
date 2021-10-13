@@ -1,6 +1,9 @@
 * { 
     margin: 0;
     padding: 0;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 } 
 
 body {
@@ -19,9 +22,18 @@ button, input {
     justify-content: center;
     margin: 0 auto;
     width: 100%;
-    max-width: 1200px;
+    max-width: 768px;
     color: #fff;
-    padding-top: 30px;
+    padding-top: 15px;
+    font-size: 15px;
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        font-size: 30px;
+        padding-top: 30px;
+        max-width: 1200px;  
+    }
 }
 
 i {
@@ -65,36 +77,36 @@ i {
     align-items: center;
 }
 
-.weather {
-    font-size: 30px;
-}
-
 .weather-descripton {
+    max-width: 100px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px;
+    padding: 10px;
     border: 1px solid none;
     border-radius: 30px;
     background-color: #363361;
     text-align: center;
 }
 
+@media (min-width: 768px) {
+    .weather-descripton {
+        max-width: 300px;
+    }
+}
+
 .weather-characteristics {
-    padding-top: 70px;
+    padding-top: 35px;
 }
 
-.wind {
-    display: flex;
-    align-items: center;
+@media (min-width: 768px) {
+    .weather-characteristics {
+        padding-top: 70px;
+    }
 }
 
-.humidity {
-    display: flex;
-    align-items: center;
-}
-
-.pressure {
+.wind, .pressure, .humidity {
     display: flex;
     align-items: center;
 }
@@ -118,21 +130,56 @@ span {
 }
 
 .sunrise-sun {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background: linear-gradient(#f6a77f, #ff659f);
     box-shadow: 0px 0px 5px #ff659f;
     border: 1px solid none;
     border-radius: 50%;
+    margin-right: 10px;
 }
 
 .sunset-sun {
     display: flex;
     align-items: center;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background-color: #ffe5ac;
     box-shadow: 0px 0px 5px #ffe5ac;
     border: 1px solid none;
     border-radius: 50%;
+    margin-right: 10px;
+}
+
+.sunset-time-value, .sunrise-time-value {
+    font-size: 30px;
+}
+
+.hourly-forecast-cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hourly-forecast-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.today-forecast-title {
+    font-weight: 100;
+    font-size: 30px;
+    padding-bottom: 30px;
+    color: #596c7b;
+}
+
+.hourly-forecast-cards-time, .hourly-forecast-cards-temp {
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.today-forecast-container {
+    width: 100%;
 }
