@@ -16,9 +16,12 @@ button, input {
 
 .wrapper {
     display: flex;
+    justify-content: center;
     margin: 0 auto;
     width: 100%;
     max-width: 1200px;
+    color: #fff;
+    padding-top: 30px;
 }
 
 i {
@@ -28,31 +31,41 @@ i {
 .search {
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
 }
 
 .search-bar {
     background-color: transparent;
     color: #fff;
-    border: 1px solid none;
+    border: 1px solid transparent;
     border-radius: 30px;
     padding: 12px;
     width: 80%;
 }
 
+.search-bar:hover {
+    border: 1px solid #5e7ca8;
+}
+
 .search-button {
     color: #557F94;
     background-color: transparent;
-    height:5em; 
-    width: 5em
+    height: 1.5em; 
+    width: 1.5em
 }
 
 .search-button:hover {
     transform: scale(1.2);
 }
 
+.card {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+}
+
 .weather {
-    padding-top: 50px;
-    color: #fff;
     font-size: 30px;
 }
 
@@ -92,4 +105,34 @@ span {
 
 .temp {
     font-size: 130px;
+    font-weight: 100;
+}
+
+.sun-state h2 {
+    font-weight: 100;
+}
+
+.sunrise, .sunset {
+    display: flex;
+    align-items: center;
+}
+
+.sunrise-sun {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(#f6a77f, #ff659f);
+    box-shadow: 0px 0px 5px #ff659f;
+    border: 1px solid none;
+    border-radius: 50%;
+}
+
+.sunset-sun {
+    display: flex;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background-color: #ffe5ac;
+    box-shadow: 0px 0px 5px #ffe5ac;
+    border: 1px solid none;
+    border-radius: 50%;
 }
