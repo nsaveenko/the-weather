@@ -47,6 +47,12 @@ const weather = {
         for (let i = currentTime; i < todayForecast.length; i++) {
             createHourlyForecastCardsForToday(todayForecast[i]);
         }
+
+        const dailyForecast = data.forecast.forecastday;
+
+        for (let i = 0; i < dailyForecast.length; i++) {
+            createDailyForecastCards(dailyForecast[i]);
+        }
     },
     search: function () {
         this.fetchWeather(searchBar.value);
@@ -90,4 +96,33 @@ function createHourlyForecastCardsForToday(data) {
 
 function convertTime(timeValue) {
     return timeValue.substring(11, 16);
+}
+
+function createDailyForecastCards(data) {
+    const cardsList = document.querySelector('.daily-forecast-cards');
+    const card = document.createElement("div");
+    const dayOfWeek = document.createElement("p");
+    const iconCard = document.createElement("img");
+    const tempContainer = document.createElement("div");
+    const maxTempTitle = document.createElement("p");
+    const minTempTitle = document.createElement("p");
+
+    card.className = "daily-forecast-card";
+    dayOfWeek.className = "daily-forecast-cards-time";
+    iconCard.className = "daily-forecast-cards-icon";
+    tempContainer.className = "temp-container";
+    maxTempTitle.className = "max-temp";
+    minTempTitle.className = "min-temp";
+
+    cardsList.appendChild(card);
+    card.appendChild(dayOfWeek);
+    card.appendChild(iconCard);
+    card.appendChild(tempContainer);
+    tempContainer.appendChild(maxTempTitle);
+    tempContainer.appendChild(minTempTitle);
+
+    dayOfWeek.innerHTML = data.date;
+    iconCard.src = data.day.condition.icon;
+    maxTempTitle.innerHTML = Math.round(data.day.maxtemp_c) + "°";
+    minTempTitle.innerHTML = Math.round(data.day.mintemp_c) + "°";
 }

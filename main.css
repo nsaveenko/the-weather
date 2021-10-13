@@ -183,3 +183,23 @@ span {
 .today-forecast-container {
     width: 100%;
 }
+
+.daily-forecast-container {
+    width: 100%;
+}
+
+.daily-forecast-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-bottom: 20px;
+}
+
+.temp-container {
+    display: flex;
+}
+
+.min-temp {
+    margin-left: 30px;
+    color: #37576f;
+}
