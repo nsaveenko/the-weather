@@ -1,7 +1,6 @@
 {
   "name": "the-weather",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "devDependencies": {
     "eslint": "^7.0.0",
@@ -15,7 +14,8 @@
   },
   "scripts": {
     "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix"
+    "lint:fix": "eslint ./src --fix",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,9 @@
   "bugs": {
     "url": "https://github.com/nsaveenko/the-weather/issues"
   },
-  "homepage": "https://github.com/nsaveenko/the-weather#readme"
+  "homepage": "https://github.com/nsaveenko/the-weather#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "description": ""
 }
