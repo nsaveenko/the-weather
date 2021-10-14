@@ -33,7 +33,6 @@ const router = async () => {
     const view = new match.route.view();
 
     document.querySelector("main").innerHTML = await view.getHtml();
-    // document.querySelector("#app").innerHTML = await view.getHtml();
 
     switch(match.route.path) {
         case '/' : 
