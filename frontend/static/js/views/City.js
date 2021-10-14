@@ -9,7 +9,6 @@ export default class extends AbstactView {
 
     async getHtml() {
         return `
-                <main> 
                 <section>
                     <h1>weather app</h1>
                     <div class="wrapper">
@@ -119,7 +118,6 @@ export default class extends AbstactView {
                         </div>
                     </div>
                 </section>
-            </main>
         `;
     }
 }

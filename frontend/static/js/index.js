@@ -1,6 +1,8 @@
 import City from "./views/City.js"
 import Cities from "./views/Cities.js"
 
+const navigationLinks = document.querySelectorAll('.nav-link');
+
 const navigateTo = (url) => {
     history.pushState(null, null, url);
     router();
@@ -30,10 +32,13 @@ const router = async () => {
 
     const view = new match.route.view();
 
-    document.querySelector("#app").innerHTML = await view.getHtml();
+    document.querySelector("main").innerHTML = await view.getHtml();
+    // document.querySelector("#app").innerHTML = await view.getHtml();
 
     switch(match.route.path) {
         case '/' : 
+            navigationLinks[0].classList.add('active-page');
+            navigationLinks[1].classList.remove('active-page');
             const windSpeed = document.querySelector('.wind-value');
             const cityTitle = document.querySelector('.city');
             const temp = document.querySelector('.temp');
@@ -182,6 +187,8 @@ const router = async () => {
             });
             break;
         case '/cities' : 
+            navigationLinks[1].classList.add('active-page');
+            navigationLinks[0].classList.remove('active-page');
             console.log('/citiestest');
             break;
     }

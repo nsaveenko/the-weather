@@ -15,6 +15,25 @@ h1 {
     display: none;
 }
 
+.nav-link {
+    color: #5e7ca8;
+    margin: 30px 40px 0px 40px;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    transform: scale(1.2);
+    color: #cb629b;
+}
+
+.active-page {
+    color: #cb629b;
+}
+
+nav {
+    display: flex;
+}
+
 button, input {
     outline: none;
     border: none;
