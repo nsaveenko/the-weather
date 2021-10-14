@@ -11,6 +11,10 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+h1 {
+    display: none;
+}
+
 button, input {
     outline: none;
     border: none;
@@ -98,6 +102,8 @@ i {
 
 .weather-characteristics {
     padding-top: 35px;
+    display: flex;
+    padding-bottom: 43px;
 }
 
 @media (min-width: 768px) {
@@ -109,6 +115,8 @@ i {
 .wind, .pressure, .humidity {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: auto 10px;
 }
 
 span {
