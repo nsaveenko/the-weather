@@ -17,7 +17,7 @@ function toggleDataForCityWeather() {
   const dailyCardsList = document.querySelector('.daily-forecast-cards');
   const hourlyCardsList = document.querySelector('.hourly-forecast-cards');
   const currentDate = new Date();
-  const currentTime = currentDate.getHours() > 11 ? currentDate.getHours() - 11 : currentDate.getHours();
+  const currentTime = currentDate.getHours();
 
   function convertToWeekDay(incorrectDate) {
     const date = new Date(incorrectDate);
@@ -47,7 +47,7 @@ function toggleDataForCityWeather() {
     card.appendChild(iconCard);
     card.appendChild(tempTitle);
 
-    timeTitle.innerHTML = convertTime(data.time)
+    timeTitle.innerHTML = convertTime(data.time);
     iconCard.src = data.condition.icon;
     tempTitle.innerHTML = `${Math.round(data.temp_c)}°`;
   }
@@ -91,8 +91,8 @@ function toggleDataForCityWeather() {
       fetch(`https://api.weatherapi.com/v1/forecast.json?key=${this.apiKey}&q=${city}&days=${daysCount}&aqi=no&alerts=no`)
         .then((response) => response.json())
         .then((data) => this.displayWeather(data))
-        .catch(() => {
-          console.log('Something went wrong :(');
+        .catch((error) => {
+          console.log('Something went wrong :( ', error.message);
         });
     },
     displayWeather(data) {
@@ -119,7 +119,8 @@ function toggleDataForCityWeather() {
 
       document.querySelector('.icon').src = currentWeather.iconSrc;
       const todayForecast = data.forecast.forecastday[0].hour;
-      const cardsCount = currentTime + 7;
+
+      const cardsCount = currentTime > 16 ? 24 : currentTime + 7;
 
       for (let i = currentTime; i < cardsCount; i += 1) {
         createHourlyForecastCardsForToday(todayForecast[i]);
@@ -154,7 +155,6 @@ function toggleDataForCityWeather() {
 
 function toggleDataForCities() {
   const defaultCities = ['Minsk', 'London', 'Denver', 'Tokyo', 'Los Angeles', 'New York'];
-  const editButton = document.querySelector('.edit-button');
 
   function createCitiesCards(data) {
     const citiesContainer = document.querySelector('.cities-cards');
@@ -180,7 +180,9 @@ function toggleDataForCities() {
 
     card.appendChild(removeButton);
 
-    // isEditClicked ? removeButton.classList.remove('hidden') : removeButton.classList.add('hidden');
+    const addictionalContainer = document.createElement('div');
+    addictionalContainer.className = 'addictional-container'; 
+    card.appendChild(addictionalContainer);
 
     const container = document.createElement('div');
     container.className = 'cities-card-content-container';
@@ -188,11 +190,11 @@ function toggleDataForCities() {
 
     const humidity = document.createElement('p');
     humidity.className = 'cities-card-humidity';
-    card.appendChild(humidity);
+    addictionalContainer.appendChild(humidity);
 
     const wind = document.createElement('p');
     wind.className = 'cities-card-wind';
-    card.appendChild(wind);
+    addictionalContainer.appendChild(wind);
 
     humidity.innerHTML = `
     <i>
@@ -250,25 +252,21 @@ function toggleDataForCities() {
     humidityValue.innerHTML = `${data.humidity} %`;
 
     const icon = document.createElement('img');
-    icon.alt = 'test';
+    icon.alt = 'card icon';
     icon.src = data.iconSrc;
+    icon.className = 'cities-card-icon'
     container.appendChild(icon);
   }
-
-  editButton.addEventListener('click', () => {
-    isEditClicked = !isEditClicked;
-    console.log(isEditClicked)
-  })
 
   const weather = {
     apiKey: '9baa190c5b0f4f81825171901211210',
     fetchWeather(city = 'Minsk') {
       fetch(`http://api.weatherapi.com/v1/current.json?key=${this.apiKey}&q=${city}&aqi=no`)
         .then((response) => response.json())
-        .then((data) => this.displayWeather(data));
-      // .catch(() => {
-      //   console.log('Something went wrong :(');
-      // });
+        .then((data) => this.displayWeather(data))
+        .catch((error) => {
+          console.log('Something went wrong :( ', error.message);
+        });
     },
     displayWeather(data) {
       const currentWeather = {
@@ -288,24 +286,22 @@ function toggleDataForCities() {
     localStorage.setItem(i, defaultCities[i]);
     weather.fetchWeather(localStorage.getItem(i));
   }
-
 }
 
 const router = async () => {
   const routes = [{
-      path: '/',
-      view: City,
-    },
-    {
-      path: '/cities',
-      view: Cities,
-    }
-  ];
+    path: '/',
+    view: City,
+  },
+  {
+    path: '/cities',
+    view: Cities,
+  }];
 
   const potentialMatches = routes.map((route) => {
     return {
-      route: route,
-      isMatch: location.pathname === route.path,
+      route,
+      isMatch: window.location.pathname === route.path,
     };
   });
 
@@ -341,7 +337,7 @@ const router = async () => {
 };
 
 const navigateTo = (url) => {
-  history.pushState(null, null, url);
+  window.history.pushState(null, null, url);
   router();
 };
 
