@@ -23,7 +23,6 @@ h1 {
 
 .nav-link:hover {
     transform: scale(1.2);
-    color: #cb629b;
 }
 
 .active-page {

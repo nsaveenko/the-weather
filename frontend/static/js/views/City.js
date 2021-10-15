@@ -1,14 +1,13 @@
 import AbstactView from './AbstractView.js';
 
 export default class extends AbstactView {
-    constructor(params) {
-        super(params);
+  constructor(params) {
+    super(params);
+    this.setTitle('The Weather App');
+  }
 
-        this.setTitle('The Weather App');
-    }
-
-    async getHtml() {
-        return `
+  async getHtml() {
+    return `
                 <section>
                     <h1>weather app</h1>
                     <div class="wrapper">
@@ -119,5 +118,5 @@ export default class extends AbstactView {
                     </div>
                 </section>
         `;
-    }
+  }
 }

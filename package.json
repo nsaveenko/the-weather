@@ -13,8 +13,8 @@
     "prettier": "^2.4.1"
   },
   "scripts": {
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix",
+    "lint": "eslint ./frontend/static/js",
+    "lint:fix": "eslint ./frontend/static/js --fix",
     "start": "node server.js"
   },
   "repository": {
