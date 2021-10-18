@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/plugin-transform-runtime": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.4.0",
     "eslint": "^7.0.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -10,12 +15,18 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.4.1"
+    "html-webpack-plugin": "^5.4.0",
+    "mini-css-extract-plugin": "^2.4.2",
+    "prettier": "^2.4.1",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.1"
   },
   "scripts": {
     "lint": "eslint ./frontend/static/js",
     "lint:fix": "eslint ./frontend/static/js --fix",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +40,8 @@
   },
   "homepage": "https://github.com/nsaveenko/the-weather#readme",
   "dependencies": {
+    "@babel/runtime": "^7.15.4",
+    "cities.json": "^1.1.5",
     "express": "^4.17.1"
   },
   "description": ""
