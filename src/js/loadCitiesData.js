@@ -3,7 +3,9 @@ import data from './data/cities.json';
 export function loadCitiesData() {
   const citiesList = ['Minsk', 'London', 'Denver', 'Tokyo', 'Los Angeles', 'New York'];
 
-  localStorage.setItem(1, citiesList);
+  if (!localStorage.length) {
+    localStorage.setItem(1, citiesList);
+  }
 
   const currentCitiesList = localStorage.getItem(1).split(',');
   const input = document.querySelector('.search-bar');
@@ -132,9 +134,12 @@ export function loadCitiesData() {
   
       createCitiesCards(obj);
     },
+    getName(data) {
+      return data.location.name;
+    },
     searchCities(value) {
       return data.data.filter((city) => city.name.toLowerCase().indexOf(value.toLowerCase()) !== -1).slice(0, 3);
-    }
+    },
   };
 
   function displayCitiesList() {

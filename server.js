@@ -3,9 +3,9 @@ const path = require("path");
 
 const app = express();
 
-app.use("/", express.static(path.resolve(__dirname, "dist")));
+app.use("/city/", express.static(path.resolve(__dirname, "dist")));
 
-app.get("/*", (req, res) => {
+app.get("/city/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
 

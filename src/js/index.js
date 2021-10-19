@@ -4,11 +4,16 @@ import Cities from './views/Cities';
 import {loadCityData} from './loadCityData'
 import {loadCitiesData} from './loadCitiesData'
 
+// let cityNameParam = 'Minsk';
+
 const navigationLinks = document.querySelectorAll('.nav-link');
+const cityLink = document.querySelector('#link');
+// cityLink.href = `/city/${cityNameParam}`;
+cityLink.href = `/city/`;
 
 const router = async () => {
   const routes = [{
-      path: '/',
+      path: `/city/`,
       view: City,
     },
     {
@@ -38,7 +43,7 @@ const router = async () => {
   document.querySelector('.main').innerHTML = await view.getHtml();
 
   switch (match.route.path) {
-    case '/':
+    case `/city/`:
       navigationLinks[0].classList.add('active-page');
       navigationLinks[1].classList.remove('active-page');
       loadCityData();
