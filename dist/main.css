@@ -90,7 +90,7 @@ i {
 
 .search-result {
   position: absolute;
-  padding: 16px;
+  padding: 0 16px;
   top: 50px;
   font-size: 20px;
   left: 16px;
@@ -101,7 +101,7 @@ i {
 }
 
 .search-result div {
-  padding: 4px;
+  padding-top: 8px;
   cursor: pointer;
 }
 
@@ -118,17 +118,11 @@ i {
   border: 1px solid #5e7ca8;
 }
 
-.search-button,
-.edit-button {
+.search-icon {
   color: #557F94;
   background-color: transparent;
-  height: 1.5em;
-  width: 1.5em
-}
-
-.search-button:hover,
-.edit-button:hover {
-  transform: scale(1.2);
+  height: 0.7em;
+  width: 0.7em;
 }
 
 .card {
