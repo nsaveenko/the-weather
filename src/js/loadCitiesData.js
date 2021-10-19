@@ -2,6 +2,10 @@ import data from './data/cities.json';
 
 export function loadCitiesData() {
   const citiesList = ['Minsk', 'London', 'Denver', 'Tokyo', 'Los Angeles', 'New York'];
+
+  localStorage.setItem(1, citiesList);
+
+  const currentCitiesList = localStorage.getItem(1).split(',');
   const input = document.querySelector('.search-bar');
   const citiesContainer = document.querySelector('.cities-cards');
 
@@ -125,7 +129,7 @@ export function loadCitiesData() {
         humidity: data.current.humidity,
         iconSrc: data.current.condition.icon,
       };
-
+  
       createCitiesCards(obj);
     },
     searchCities(value) {
@@ -135,8 +139,9 @@ export function loadCitiesData() {
 
   function displayCitiesList() {
     citiesContainer.innerHTML = '';
-    for (let i = 0; i < citiesList.length; i += 1) {
-      weather.fetchWeather(citiesList[i]);
+
+    for (let i = 0; i < currentCitiesList.length; i++) {
+      weather.fetchWeather(currentCitiesList[i]);
     }
   }
 
@@ -161,8 +166,10 @@ export function loadCitiesData() {
 
       row.addEventListener('click', (event) => {
         const cityName = event.target.id;
-        citiesList.push(cityName);
-        citiesList.shift();
+        currentCitiesList.push(cityName);
+        currentCitiesList.shift();
+        localStorage.removeItem(1);
+        localStorage.setItem(1, currentCitiesList);
         displayCitiesList();
         input.value = '';
         resultElement.classList.add('hidden');
