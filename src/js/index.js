@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.target.matches('[data-link]')) {
       event.preventDefault();
       if (!event.target.parentNode.classList.contains('active-page')) {
+        event.preventDefault();
         navigateTo(event.target.parentNode.href);
       }
     }
