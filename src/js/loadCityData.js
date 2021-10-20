@@ -13,6 +13,10 @@ function loadCityData() {
   const currentTime = currentDate.getHours();
 
   function convertToWeekDay(incorrectDate) {
+    if (!incorrectDate) {
+      return '';
+    }
+
     const date = new Date(incorrectDate);
     const options = {
       weekday: 'long',
@@ -21,6 +25,9 @@ function loadCityData() {
   }
 
   function convertTime(timeValue) {
+    if (!timeValue) {
+      return '';
+    }
     return timeValue.substring(11, 16);
   }
 
