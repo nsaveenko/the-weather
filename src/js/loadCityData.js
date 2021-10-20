@@ -91,43 +91,45 @@ function loadCityData() {
         });
     },
     displayWeather(data) {
-      try {
-        const currentWeather = {
-          cityName: data.location.name,
-          description: data.current.condition.text,
-          temp: Math.round(data.current.temp_c),
-          windSpeed: data.current.wind_kph,
-          humidity: data.current.humidity,
-          pressure: data.current.pressure_mb,
-          iconSrc: data.current.condition.icon,
-          sunrise: data.forecast.forecastday[0].astro.sunrise,
-          sunset: data.forecast.forecastday[0].astro.sunset,
-        };
+      const currentWeather = {
+        cityName: data.location.name,
+        description: data.current.condition.text,
+        temp: Math.round(data.current.temp_c),
+        windSpeed: data.current.wind_kph,
+        humidity: data.current.humidity,
+        pressure: data.current.pressure_mb,
+        iconSrc: data.current.condition.icon,
+        sunrise: data.forecast.forecastday[0].astro.sunrise,
+        sunset: data.forecast.forecastday[0].astro.sunset,
+      };
 
-        sunrise.innerHTML = currentWeather.sunrise;
-        sunset.innerHTML = currentWeather.sunset;
-        cityTitle.innerHTML = currentWeather.cityName;
-        windSpeed.innerHTML = `${currentWeather.windSpeed} km/h`;
-        temp.innerHTML = `${currentWeather.temp}°`;
-        description.innerHTML = currentWeather.description;
-        humidity.innerHTML = `${currentWeather.humidity} %`;
-        pressure.innerHTML = `${currentWeather.pressure} mb`;
-        document.querySelector('.icon').src = currentWeather.iconSrc;
-        const todayForecast = data.forecast.forecastday[0].hour;
+      sunrise.innerHTML = currentWeather.sunrise;
+      sunset.innerHTML = currentWeather.sunset;
+      cityTitle.innerHTML = currentWeather.cityName;
+      windSpeed.innerHTML = `${currentWeather.windSpeed} km/h`;
+      temp.innerHTML = `${currentWeather.temp}°`;
+      description.innerHTML = currentWeather.description;
+      humidity.innerHTML = `${currentWeather.humidity} %`;
+      pressure.innerHTML = `${currentWeather.pressure} mb`;
+      document.querySelector('.icon').src = currentWeather.iconSrc;
+      const todayForecast = data.forecast.forecastday[0].hour;
 
-        const cardsCount = currentTime > 16 ? 24 : currentTime + 4;
+      let cardsCount = 22 + 4;
+      let cardsStartValue = currentTime;
 
-        for (let i = currentTime; i < cardsCount; i += 1) {
-          createHourlyForecastCardsForToday(todayForecast[i]);
-        }
+      if (cardsCount > 24) {
+        cardsCount = 24;
+        cardsStartValue = 20;
+      }
 
-        const dailyForecast = data.forecast.forecastday;
+      for (let i = cardsStartValue; i < cardsCount; i += 1) {
+        createHourlyForecastCardsForToday(todayForecast[i]);
+      }
 
-        for (let i = 0; i < dailyForecast.length; i += 1) {
-          createDailyForecastCards(dailyForecast[i]);
-        }
-      } catch (e) {
-        console.log(e);
+      const dailyForecast = data.forecast.forecastday;
+
+      for (let i = 0; i < dailyForecast.length; i += 1) {
+        createDailyForecastCards(dailyForecast[i]);
       }
     },
   };

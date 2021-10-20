@@ -78,6 +78,11 @@ i {
   align-items: center;
 }
 
+.city {
+  font-weight: 300;
+  font-size: 20px;
+}
+
 .search-result {
   width: 170px;
   position: absolute;
@@ -301,7 +306,7 @@ span {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 80%;
+  width: 100%;
   column-gap: 30px;
   row-gap: 55px;
   padding-bottom: 10px;
@@ -464,7 +469,7 @@ span {
   }
 }
 
-@media (min-width: 588px) and (max-width: 767px) {
+@media (min-width: 525px) and (max-width: 767px) {
   .cities-card {
     font-size: 20px;
     padding: 20px;
