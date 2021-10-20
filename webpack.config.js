@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 // This is the main configuration object.
 // Here, you write different options and tell Webpack what to do
@@ -33,6 +33,7 @@ module.exports = {
       template: 'src/index.html'
     }),
     new MiniCssExtractPlugin(),
+    new FaviconsWebpackPlugin('src/asserts/favicon/favicon-32x32.png'),
   ],
 
   module: {

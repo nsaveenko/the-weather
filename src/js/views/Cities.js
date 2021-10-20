@@ -1,4 +1,4 @@
-import AbstactView from './AbstractView.js';
+import AbstactView from './AbstractView';
 
 export default class extends AbstactView {
   constructor(params) {
@@ -8,7 +8,7 @@ export default class extends AbstactView {
 
   async getHtml() {
     return `
-    <section>
+      <section>
         <h1>weather app</h1>
         <div class="wrapper">
             <div class="content-container">
@@ -24,12 +24,12 @@ export default class extends AbstactView {
                 </div>
             </div>
         </div>
-    </section>
-    <section>
-        <div class="wrapper">
-            <div class="cities-cards"></div>
-        </div>
-    </section>
+      </section>
+        <section>
+            <div class="wrapper">
+                <div class="cities-cards"></div>
+            </div>
+        </section>
     `;
   }
 }

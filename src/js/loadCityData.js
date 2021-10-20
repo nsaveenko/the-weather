@@ -1,4 +1,4 @@
-export function loadCityData() {
+function loadCityData() {
   const windSpeed = document.querySelector('.wind-value');
   const cityTitle = document.querySelector('.city');
   const temp = document.querySelector('.temp');
@@ -73,11 +73,6 @@ export function loadCityData() {
     minTempTitle.innerHTML = `${Math.round(data.day.mintemp_c)}°`;
   }
 
-  function updateCity() {
-    dailyCardsList.innerHTML = '';
-    hourlyCardsList.innerHTML = '';
-  }
-
   const weather = {
     apiKey: '9baa190c5b0f4f81825171901211210',
     fetchWeather(city = 'Minsk', daysCount = 3) {
@@ -89,43 +84,47 @@ export function loadCityData() {
         });
     },
     displayWeather(data) {
-      const currentWeather = {
-        cityName: data.location.name,
-        description: data.current.condition.text,
-        temp: Math.round(data.current.temp_c),
-        windSpeed: data.current.wind_kph,
-        humidity: data.current.humidity,
-        pressure: data.current.pressure_mb,
-        iconSrc: data.current.condition.icon,
-        sunrise: data.forecast.forecastday[0].astro.sunrise,
-        sunset: data.forecast.forecastday[0].astro.sunset,
-      };
+      try {
+        const currentWeather = {
+          cityName: data.location.name,
+          description: data.current.condition.text,
+          temp: Math.round(data.current.temp_c),
+          windSpeed: data.current.wind_kph,
+          humidity: data.current.humidity,
+          pressure: data.current.pressure_mb,
+          iconSrc: data.current.condition.icon,
+          sunrise: data.forecast.forecastday[0].astro.sunrise,
+          sunset: data.forecast.forecastday[0].astro.sunset,
+        };
 
-      sunrise.innerHTML = currentWeather.sunrise;
-      sunset.innerHTML = currentWeather.sunset;
-      cityTitle.innerHTML = currentWeather.cityName;
-      windSpeed.innerHTML = `${currentWeather.windSpeed} km/h`;
-      temp.innerHTML = `${currentWeather.temp}°`;
-      description.innerHTML = currentWeather.description;
-      humidity.innerHTML = `${currentWeather.humidity} %`;
-      pressure.innerHTML = `${currentWeather.pressure} mb`;
+        sunrise.innerHTML = currentWeather.sunrise;
+        sunset.innerHTML = currentWeather.sunset;
+        cityTitle.innerHTML = currentWeather.cityName;
+        windSpeed.innerHTML = `${currentWeather.windSpeed} km/h`;
+        temp.innerHTML = `${currentWeather.temp}°`;
+        description.innerHTML = currentWeather.description;
+        humidity.innerHTML = `${currentWeather.humidity} %`;
+        pressure.innerHTML = `${currentWeather.pressure} mb`;
+        document.querySelector('.icon').src = currentWeather.iconSrc;
+        const todayForecast = data.forecast.forecastday[0].hour;
 
-      document.querySelector('.icon').src = currentWeather.iconSrc;
-      const todayForecast = data.forecast.forecastday[0].hour;
+        const cardsCount = currentTime > 16 ? 24 : currentTime + 4;
 
-      const cardsCount = currentTime > 16 ? 24 : currentTime + 7;
+        for (let i = currentTime; i < cardsCount; i += 1) {
+          createHourlyForecastCardsForToday(todayForecast[i]);
+        }
 
-      for (let i = currentTime; i < cardsCount; i += 1) {
-        createHourlyForecastCardsForToday(todayForecast[i]);
-      }
+        const dailyForecast = data.forecast.forecastday;
 
-      const dailyForecast = data.forecast.forecastday;
-
-      for (let i = 0; i < dailyForecast.length; i += 1) {
-        createDailyForecastCards(dailyForecast[i]);
+        for (let i = 0; i < dailyForecast.length; i += 1) {
+          createDailyForecastCards(dailyForecast[i]);
+        }
+      } catch (e) {
+        console.log(e);
       }
     },
   };
-
-  weather.fetchWeather();
+  weather.fetchWeather(window.location.pathname.split(/\//)[2]);
 }
+
+export default loadCityData;

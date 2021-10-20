@@ -1,6 +1,7 @@
-import data from './data/cities.json';
+import citiesListFomJson from './data/cities.json';
+import navigateTo from './index';
 
-export function loadCitiesData() {
+function loadCitiesData() {
   const citiesList = ['Minsk', 'London', 'Denver', 'Tokyo', 'Los Angeles', 'New York'];
 
   if (!localStorage.length) {
@@ -31,6 +32,7 @@ export function loadCitiesData() {
     const card = document.createElement('div');
     card.className = 'cities-card';
     citiesContainer.appendChild(card);
+    card.setAttribute('id', data.cityName);
 
     card.appendChild(removeButton);
 
@@ -108,8 +110,20 @@ export function loadCitiesData() {
     const icon = document.createElement('img');
     icon.alt = 'card icon';
     icon.src = data.iconSrc;
-    icon.className = 'cities-card-icon'
+    icon.className = 'cities-card-icon';
     container.appendChild(icon);
+
+    function getIdFromChild(node) {
+      if (!node.id) {
+        return getIdFromChild(node.parentNode);
+      }
+      return node.id;
+    }
+
+    card.addEventListener('click', (event) => {
+      const cityFromId = getIdFromChild(event.target);
+      navigateTo(`/city/${cityFromId}`);
+    });
   }
 
   const weather = {
@@ -131,21 +145,22 @@ export function loadCitiesData() {
         humidity: data.current.humidity,
         iconSrc: data.current.condition.icon,
       };
-  
       createCitiesCards(obj);
     },
-    getName(data) {
-      return data.location.name;
-    },
     searchCities(value) {
-      return data.data.filter((city) => city.name.toLowerCase().indexOf(value.toLowerCase()) !== -1).slice(0, 3);
+      return citiesListFomJson.data.filter((city) => {
+        const cityName = city.name.toLowerCase();
+        const searchValue = value.toLowerCase();
+        const isPartialMatch = cityName.indexOf(searchValue) !== -1;
+        return isPartialMatch;
+      }).slice(0, 3);
     },
   };
 
   function displayCitiesList() {
     citiesContainer.innerHTML = '';
 
-    for (let i = 0; i < currentCitiesList.length; i++) {
+    for (let i = 0; i < currentCitiesList.length; i += 1) {
       weather.fetchWeather(currentCitiesList[i]);
     }
   }
@@ -160,7 +175,7 @@ export function loadCitiesData() {
 
     if (input.value.length > 0) {
       resultElement.classList.remove('hidden');
-    } 
+    }
 
     result.forEach((city) => {
       const row = document.createElement('div');
@@ -178,7 +193,11 @@ export function loadCitiesData() {
         displayCitiesList();
         input.value = '';
         resultElement.classList.add('hidden');
-      })
+
+        navigateTo(`/city/${cityName}`);
+      });
     });
-  })
+  });
 }
+
+export default loadCitiesData;

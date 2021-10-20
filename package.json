@@ -15,6 +15,8 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^4.0.0",
+    "favicons": "^6.2.2",
+    "favicons-webpack-plugin": "^5.0.2",
     "html-webpack-plugin": "^5.4.0",
     "mini-css-extract-plugin": "^2.4.2",
     "prettier": "^2.4.1",
@@ -23,8 +25,8 @@
     "webpack-cli": "^4.9.1"
   },
   "scripts": {
-    "lint": "eslint ./frontend/static/js",
-    "lint:fix": "eslint ./frontend/static/js --fix",
+    "lint": "eslint ./src/js",
+    "lint:fix": "eslint ./src/js --fix",
     "start": "node server.js",
     "build": "webpack --config webpack.config.js"
   },
