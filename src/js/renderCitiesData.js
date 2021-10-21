@@ -110,7 +110,7 @@ function renderCitiesData() {
         .then((response) => response.json())
         .then((data) => this.displayWeather(data))
         .catch(() => {
-          console.log('Something went wrong :( ');
+          alert('Something went wrong :( ');
         });
     },
     displayWeather(data) {
