@@ -1,6 +1,6 @@
-const citiesListFomJson = require('../data/cities.json');
+import citiesListFomJson from '../data/cities.json';
 
-function searchCities(value) {
+const searchCities = (value) => {
   if (!value) {
     return [];
   }
@@ -13,6 +13,6 @@ function searchCities(value) {
   }).slice(0, 3);
 
   return result;
-}
+};
 
-module.exports = { searchCities };
+export default searchCities;

@@ -94,6 +94,10 @@ i {
   z-index: 2;
 }
 
+.search-result div:last-child {
+  padding-bottom: 8px;
+}
+
 .search-result div {
   padding-top: 8px;
   cursor: pointer;
@@ -102,13 +106,18 @@ i {
 .search-bar {
   background-color: transparent;
   color: #fff;
-  border: 1px solid transparent;
-  border-radius: 30px;
-  padding: 12px;
   width: 80%;
 }
 
-.search-bar:hover {
+.search-container {
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  padding: 12px;
+  border: 1px solid transparent;
+}
+
+.search-container:hover {
   border: 1px solid #5e7ca8;
 }
 
@@ -359,14 +368,6 @@ span {
   width: 20%;
 }
 
-.remove-button {
-  visibility: hidden;
-  display: flex;
-  cursor: pointer;
-  color: #f0519f;
-  background-color: transparent;
-}
-
 .hidden {
   visibility: hidden;
 }
@@ -377,6 +378,11 @@ span {
     font-size: 30px;
     max-width: 1200px;
     padding: 60px 70px 0px 70px;
+  }
+
+  .city {
+    font-weight: 400;
+    font-size: 30px;
   }
 
   .wind,

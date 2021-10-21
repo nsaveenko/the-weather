@@ -46,8 +46,17 @@
   "homepage": "https://github.com/nsaveenko/the-weather#readme",
   "dependencies": {
     "@babel/runtime": "^7.15.4",
-    "cities.json": "^1.1.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "express": "^4.17.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
   },
   "description": ""
 }

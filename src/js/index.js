@@ -1,8 +1,8 @@
 import '../style/main.css';
 import City from './views/City';
 import Cities from './views/Cities';
-import loadCityData from './loadCityData';
-import loadCitiesData from './loadCitiesData';
+import renderCityData from './renderCityData';
+import renderCitiesData from './renderCitiesData';
 
 const routes = [
   { path: '/city', View: City },
@@ -25,11 +25,11 @@ const renderNavigationStyles = (match) => {
   }
 };
 
-const loadData = (match) => {
+const renderRoute = (match) => {
   if (match.route.path === '/cities') {
-    loadCitiesData();
+    renderCitiesData();
   } else {
-    loadCityData();
+    renderCityData();
   }
 };
 
@@ -52,7 +52,7 @@ const router = async () => {
 
   await renderView(match);
   renderNavigationStyles(match);
-  loadData(match);
+  renderRoute(match);
 };
 
 const navigateTo = (url) => {
@@ -64,10 +64,9 @@ window.addEventListener('popstate', router);
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('click', (event) => {
+    event.preventDefault();
     if (event.target.matches('[data-link]')) {
-      event.preventDefault();
       if (!event.target.parentNode.classList.contains('active-page')) {
-        event.preventDefault();
         navigateTo(event.target.parentNode.href);
       }
     }

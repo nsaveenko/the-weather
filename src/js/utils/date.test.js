@@ -1,4 +1,4 @@
-const { convertTime, convertToWeekDay } = require('./date');
+import { convertTime, convertToWeekDay } from './date';
 
 describe('Convert time function', () => {
   test('should return time in hh:mm format', () => {

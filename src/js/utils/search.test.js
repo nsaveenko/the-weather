@@ -1,4 +1,4 @@
-const { searchCities } = require('./search');
+import searchCities from './search';
 
 describe('Search city function', () => {
   const expectedResult = [{
